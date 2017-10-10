@@ -1,14 +1,14 @@
-var express = require('express'); //API Express
+var express = require('express'); //API Express - also declared in package.json
 var morgan = require('morgan');
 
 var app = express(); //Shorthand to access express API.
 
 //Middleware - a way of invoking express into Morgan library.
-app.use(morgan('dev'));
+app.use(morgan('dev')); //invoking morgan object
 
 
 app.get('/testing', function(req, res){
-    var name = "Batman";
+    var name = "SUperr!";
     res.json("My Name is " + name);
 }); 
 

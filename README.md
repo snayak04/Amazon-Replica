@@ -7,4 +7,4 @@
 ```bash
 sudo npm install nodemon -g
 ```
-This should install nodemon globally.
+This should install nodemon globally
