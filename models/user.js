@@ -1,8 +1,8 @@
-var mongoose = require('mongoose'); //Object relational language
+var mongoose = require('mongoose'); //Object relational network - Connects MongoDB and Node.js
 var bcrypt = require('bcrypt-nodejs'); //Password encryption library
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
-/* The user schemas */
+/* The user schemas - Blue print of data base*/
 var UserSchema = new Schema({
     email:{ type: String, unique: true, lowercase: true},
     password: String,
@@ -24,7 +24,6 @@ var UserSchema = new Schema({
 
 /* Hash the password */
 
-var user = new User();
 UserSchema.pre('save', function(next){ //.pre - before saving to databse 
     var user = this;
     if(!user.isModified('password')) return next();
@@ -39,8 +38,10 @@ UserSchema.pre('save', function(next){ //.pre - before saving to databse
 });
 
 
-/* Compare user typed password to the database's */
+/* Compare user typed password to the database's - Use .method to make our own function */
 
-UserSchema.methods.comparePassword = function(password){
+UserSchema.methods.authenticate = function(password){
     return bcrypt.compareSync(password, this.password);
 }
+
+module.exports = mongoose.model('User', UserSchema); // Export the whole schema

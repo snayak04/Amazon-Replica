@@ -1,11 +1,19 @@
 var express = require('express'); //API Express - also declared in package.json
 var morgan = require('morgan');
+var mongoose = require('mongoose');
 
 var app = express(); //Shorthand to access express API.
 
-//Middleware - a way of invoking express into Morgan library.
-app.use(morgan('dev')); //invoking morgan object
 
+mongoose.connect('mongodb://root:admin@ds117625.mlab.com:17625/amazon-replica', function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log("Connected to the databse!");
+    }
+})
+//Middleware - a way of invoking express into Morgan library.
+app.use(morgan('dev')); 
 
 app.get('/testing', function(req, res){
     var name = "SUperr!";
